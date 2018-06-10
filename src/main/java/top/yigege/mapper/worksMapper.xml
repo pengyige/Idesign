@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.yigege.dao.WorksDao">
+	<!-- 将作品保存至数据库中 -->
+	<insert id="saveWorks" parameterType="top.yigege.domain.Works">
+		insert into works (name,time,imagepath,remark,star,comment,reply) values (#{name},#{time},#{imagepath},#{remark},#{star},#{comment},#{reply})
+	</insert>
+
+	<!--配置一个resultMap 指定返回的类型 -->
+	    <resultMap id="listWorks" type="top.yigege.domain.Works">
+	        <id column="worksId" property="worksId" />
+	        <result column="name" property="name" />
+	        <result column="time" property="time" />
+	        <result column="imagepath" property="imagepath"/>
+	        <result column="star" property="star"/>
+	        <result column="comment" property="comment"/>
+	        <result column="reply" property="reply"/>
+	        <result column="remark" property="remark"/>
+	    </resultMap>
+
+	<!-- 得到所有作品 -->
+	<select id="getAll" resultMap="listWorks">
+		 select * from works order by time desc;
+	</select>
+	
+	
+	<!-- 通过姓名获取所有作品 -->
+	<select id="getWorksByName"  parameterType="java.lang.String" resultMap="listWorks">
+		select * from works where name = #{name} order by time desc;
+	</select>
+	
+	<!-- 通过Id获取所有作品 -->
+	<select id="getWorksById"  parameterType="java.lang.Integer" resultType="top.yigege.domain.Works">
+		select * from works where worksId = #{worksId};
+	</select>
+	
+	<!-- 通过remark获取所有作品 -->
+	<select id="getFindWorksByRemark"  parameterType="java.lang.String" resultType="top.yigege.domain.Works">
+		select * from works where remark like "%"#{remark}"%";
+	</select>
+	
+	
+	<!-- 通过Id为作品点赞 -->
+	<update id="starWorks" parameterType="java.lang.Integer">
+		update works set star = star + 1 where worksId = #{worksId}
+	</update>
+</mapper>

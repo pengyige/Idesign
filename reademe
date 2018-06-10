@@ -1,0 +1,45 @@
+#I设计系统后台开发
+
+#一、项目环境搭建
+  1.1 导入开发包
+      mybatis 3.1.1
+      spring 4.0.2
+      springmvc 4.0.2
+      ...
+  1.2 项目结构
+  	  src/main/java   			 //java文件
+  	  	top.yigege.domain
+  	  	top.yigege.controller
+  	  	top.yigege.service
+  	  	top.yigege.dao
+  	  	top.yigege.dao.impl
+  	  	top.yigege.util
+  	  src/main/resources		//配置文件
+  	  src/test/java				//测试
+  	  src/main/webapp			//web目录
+  	  	 js
+  	  	 images
+  	  	 css
+  	  	 WEB-INFA
+ #二、数据库
+ 2.1 数据库设计
+ 作品表(作品Id,作家姓名,作品时间,作品图片地址,备注,点赞数,评论数,转发数)
+ 
+ 2.2 创建数据库
+ create database idesign;
+ 
+ 2.2 建表
+ create table works(
+ 	worksId int(11) NOT NULL AUTO_INCREMENT,
+ 	name varchar(20),
+ 	time datetime DEFAULT NULL,
+ 	imagepath varchar(50) NOT NULL,
+ 	remark varchar(30),
+ 	star int(11) DEFAULT 0,
+ 	comment int(11) DEFAULT 0,
+ 	reply int(11) DEFAULT 0,
+ 	primary key(worksId)
+ );
+ 
+ 
+  	  
